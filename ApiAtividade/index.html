@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Jogos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a2a2a;
+            margin: 0;
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #lista {
+            max-width: 700px;
+            margin: auto;
+            padding: 0;
+        }
+        #lista li {
+            list-style: none;
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+
+            font-size: 18px;
+        }
+        button {
+            margin-top: 15px;
+            margin-right: 8px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:white;">Lista de Jogos</h1>
+    <ol id="lista"></ol>
+    <script>
+        fetch('http://localhost:3000/jogos')
+        .then(res => res.json())
+        .then(data => {
+            const ul = document.getElementById("lista");
+            data.forEach(user => {
+                const li = document.createElement("li");
+                li.textContent = `${user.titulo} - ${user.genero} - ${user.plataforma} - ${user.status} - nota: ${user.nota}/10`;
+                const botaoTitulo = document.createElement("button");
+                botaoTitulo.textContent = "Alterar título";
+                botaoTitulo.onclick = function() {
+                    alterarTitulo(user.id);
+                };
+                const botaoInfo = document.createElement("button");
+                botaoInfo.textContent = "Alterar gênero/plataforma";
+                botaoInfo.onclick = function() {
+                    alterarInfo(user.id);
+                };
+                const botaoStatus = document.createElement("button");
+                botaoStatus.textContent = "Alterar status";
+                botaoStatus.onclick = function() {
+                    alterarStatus(user.id);
+                };
+
+                li.appendChild(document.createElement("br"));
+                li.appendChild(botaoTitulo);
+                li.appendChild(botaoInfo);
+                li.appendChild(botaoStatus);
+                ul.appendChild(li);
+            })})
+        .catch(err => console.error("Erro ao buscar jogos", err));
+        function alterarTitulo(id) {
+            let titulo = prompt("Digite o novo título:");
+            fetch("http://localhost:3000/jogos/" + id, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    titulo: titulo
+                })})
+            .then(() => {
+                location.reload();
+            });
+        }
+
+        function alterarInfo(id) {
+            let genero = prompt("Digite o novo gênero:");
+            let plataforma = prompt("Digite a nova plataforma:");
+            fetch("http://localhost:3000/jogos/" + id, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    genero: genero,
+                    plataforma: plataforma
+                })})
+            .then(() => {
+                location.reload();
+            });
+        }
+
+        function alterarStatus(id) {
+            let status = prompt("Digite o novo status:");
+            fetch("http://localhost:3000/jogos/" + id, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    status: status
+                })})
+            .then(() => {
+                location.reload();
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "jogos": [
+    {
+      "id": "DOac67wncoL",
+      "titulo": "Minecraft",
+      "genero": "SandBox",
+      "plataforma": "Todas",
+      "nota": "9",
+      "status": null
+    },
+    {
+      "id": "3jsUQyL_Gzs",
+      "titulo": "Terraria",
+      "genero": "SandBox",
+      "plataforma": "Todas",
+      "nota": "9",
+      "status": "Fora do ar"
+    },
+    {
+      "id": "SdRwVe91aIo",
+      "titulo": "Hollow Knight",
+      "genero": "Metroidvania",
+      "plataforma": "Pc,console",
+      "nota": "10",
+      "status": "Fora do ar"
+    },
+    {
+      "id": "UAYXSIZ21Hc",
+      "titulo": "The Bind of Isacc",
+      "genero": "Roguelike",
+      "plataforma": "Pc",
+      "nota": "10",
+      "status": "Fora do ar"
+    },
+    {
+      "id": "Qq6orEBAauA",
+      "titulo": "The Bind of Isacc",
+      "genero": "Roguelike",
+      "plataforma": "Pc",
+      "nota": "10",
+      "status": "Fora do ar"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
